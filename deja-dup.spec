@@ -11,6 +11,7 @@ BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.10
 BuildRequires:	dbus-glib-devel
+BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.20.0
 BuildRequires:	gnome-doc-utils
@@ -20,6 +21,7 @@ BuildRequires:	libgnome-keyring-devel
 BuildRequires:	libnotify-devel
 BuildRequires:	libtool
 BuildRequires:	libunique-devel
+BuildRequires:	libxml2-progs
 BuildRequires:	nautilus-devel
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(find_lang) >= 1.23
