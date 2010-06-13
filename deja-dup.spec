@@ -1,11 +1,11 @@
 Summary:	Backup tool
 Name:		deja-dup
-Version:	14.1
+Version:	14.2
 Release:	1
 License:	GPL v3
 Group:		X11/Applications
-Source0:	http://launchpad.net/deja-dup/14/14.1/+download/%{name}-%{version}.tar.bz2
-# Source0-md5:	6fe6a0e1ece31121ec6d9c22ed805c45
+Source0:	http://launchpad.net/deja-dup/14/14.2/+download/%{name}-%{version}.tar.bz2
+# Source0-md5:	30805149de02395db9944c778936437b
 URL:		http://launchpad.net/deja-dup
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.64
@@ -113,6 +113,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(lt) %{_mandir}/lt/man1/*.1*
 %lang(nl) %{_mandir}/nb/man1/*.1*
 %lang(nl) %{_mandir}/nl/man1/*.1*
+%lang(pl) %{_mandir}/pl/man1/*.1*
 %lang(ps) %{_mandir}/ps/man1/*.1*
 %lang(ru) %{_mandir}/ru/man1/*.1*
 %lang(sv) %{_mandir}/sv/man1/*.1*
