@@ -1,11 +1,11 @@
 Summary:	Backup tool
 Name:		deja-dup
-Version:	16.0
+Version:	16.1.1
 Release:	1
 License:	GPL v3
 Group:		X11/Applications
-Source0:	http://launchpad.net/deja-dup/16/16.0/+download/%{name}-%{version}.tar.bz2
-# Source0-md5:	5016ac0cf1070a227b0a3703b6390320
+Source0:	http://launchpad.net/deja-dup/16/16.1.1/+download/%{name}-%{version}.tar.bz2
+# Source0-md5:	debf223cbc8df395ca028a9afaa62c19
 URL:		http://launchpad.net/deja-dup
 BuildRequires:	GConf2-devel
 BuildRequires:	autoconf >= 2.64
