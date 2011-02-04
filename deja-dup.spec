@@ -1,7 +1,7 @@
 Summary:	Backup tool
 Name:		deja-dup
 Version:	16.1.1
-Release:	1
+Release:	2
 License:	GPL v3
 Group:		X11/Applications
 Source0:	http://launchpad.net/deja-dup/16/16.1.1/+download/%{name}-%{version}.tar.bz2
@@ -26,7 +26,8 @@ BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	vala >= 0.10.0
-Requires(post,postun):	gtk+2
+Requires(post,postun):	gtk-update-icon-cache
+Requires(post,postun):	hicolor-icon-theme
 Requires(post,preun):	GConf2
 Requires:	duplicity
 Requires:	glib2 >= 1:2.26.0
