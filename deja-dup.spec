@@ -1,17 +1,17 @@
 Summary:	Backup tool
+Summary(pl.UTF-8):      Narzędzie do wykonywania kopii zapasowych
 Name:		deja-dup
-Version:	20.0
+Version:	32.0
 Release:	1
 License:	GPL v3
 Group:		X11/Applications
-Source0:	http://launchpad.net/deja-dup/20/20.0/+download/%{name}-%{version}.tar.bz2
-# Source0-md5:	ff377e6826611bc26f0075ec6ed74ac7
+Source0:	http://launchpad.net/deja-dup/32/32.0/+download/%{name}-%{version}.tar.xz
+# Source0-md5:	83e693cfebe397be0c67d3d362ae92c9
 URL:		http://launchpad.net/deja-dup
-BuildRequires:	autoconf >= 2.64
-BuildRequires:	automake >= 1:1.11
+BuildRequires:	cmake
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gettext-devel
-BuildRequires:	glib2-devel >= 1:2.26.0
+BuildRequires:	glib2-devel >= 1:2.32.0
 BuildRequires:	gnome-doc-utils
 BuildRequires:	gtk+3-devel >= 3.0.0
 BuildRequires:	intltool >= 0.40.0
@@ -26,11 +26,13 @@ BuildRequires:	perl-Locale-gettext
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(find_lang) >= 1.35
 BuildRequires:	rpmbuild(macros) >= 1.311
-BuildRequires:	vala >= 0.12.0
+BuildRequires:	vala >= 0.20.0
 BuildRequires:	yelp-tools >= 3.2.0
+BuildRequires:  libpeas-devel
+BuildRequires:  vala-libsecret
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	glib2 >= 1:2.26.0
-Requires:	duplicity
+Requires:	duplicity >= 0.6.23
 Requires:	hicolor-icon-theme
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -47,18 +49,35 @@ Features:
 - Schedules regular backups
 - Integrates well into your GNOME desktop
 
+%description -l pl.UTF-8
+Deja Dup jest prostym narzędziem do wykonywania kopii zapasowych. Ukrywa on
+złożoność prawidłowych kopii zapasowych (szyfrowanych, poza komputerem i
+regularnych) i używa programu duplicity jako mechanizmu.
+
+%package -n nautilus-extension-deja-dup
+Summary:	deja-dup extension for Nautilus
+Summary(pl.UTF-8):      Rozszerzenie deja-dup dla Nautilusa
+Group:		X11/Applications
+Requires:	%{name} = %{version}-%{release}
+Requires:	nautilus >= 3.0.0
+
+%description -n nautilus-extension-deja-dup
+This package provides a Nautilus extension that adds the 'Revert to
+Previous Version' option to the right-click context menu in Nautilus.
+
+%description -n nautilus-extension-deja-dup -l pl.UTF-8
+Ten pakiet dostarcza rozszerzenie Nautilusa dodające opcję "Przywróć do
+poprzedniej wersji" do menu kontekstowego uaktywnianego prawym klawiszem myszy
+w Nautilusie.
+
 %prep
 %setup -q
 
 %build
-%{__intltoolize}
-%{__libtoolize}
-%{__aclocal} -I m4
-%{__autoconf}
-%{__autoheader}
-%{__automake}
-%configure \
-	--disable-silent-rules
+%cmake \
+ -DENABLE_NAUTILUS=ON \
+ -DCMAKE_INSTALL_SYSCONFDIR=%{_sysconfdir} \
+ -DCMAKE_INSTALL_LIBEXECDIR=%{_libexecdir}
 
 %{__make}
 
@@ -68,7 +87,17 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/nautilus/extensions-3.0/*.{a,la}
+for lang in az bo en_CA hi io kk ps shn; do
+  %{__rm} -rf $RPM_BUILD_ROOT%{_localedir}/$lang
+done
+
+for lang in bs en_AU eo my sk; do
+  %{__rm} -rf $RPM_BUILD_ROOT%{_datadir}/help/$lang
+done
+
+for lang in az be bn bo en_CA fr_CA fy gd hi io kk km mhr my pa se shn si ta ug uz; do
+  %{__rm} -rf $RPM_BUILD_ROOT%{_mandir}/$lang
+done
 
 %find_lang %{name} --with-gnome
 
@@ -89,6 +118,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/deja-dup
 %attr(755,root,root) %{_bindir}/deja-dup-preferences
 %dir %{_libdir}/deja-dup
+%dir %{_libdir}/deja-dup/tools
 %attr(755,root,root) %{_libdir}/deja-dup/deja-dup-monitor
 %{_datadir}/GConf/gsettings/deja-dup.convert
 %{_datadir}/deja-dup
@@ -98,12 +128,18 @@ rm -rf $RPM_BUILD_ROOT
 %{_iconsdir}/hicolor/*/*/*.png
 %{_iconsdir}/hicolor/scalable/*/*.svg
 %{_sysconfdir}/xdg/autostart/deja-dup-monitor.desktop
+%{_libdir}/deja-dup/libdeja.so
+%{_libdir}/deja-dup/libwidgets.so
+%{_libdir}/deja-dup/tools/duplicity.plugin
+%{_libdir}/deja-dup/tools/libduplicity.so
+%{_datadir}/appdata/deja-dup.appdata.xml
 %{_mandir}/man1/*.1*
 %lang(ar) %{_mandir}/ar/man1/*.1*
 %lang(ast) %{_mandir}/ast/man1/*.1*
 %lang(bg) %{_mandir}/bg/man1/*.1*
 %lang(bs) %{_mandir}/bs/man1/*.1*
 %lang(ca) %{_mandir}/ca/man1/*.1*
+%lang(ca@valencia) %{_mandir}/ca@valencia/man1/*.1*
 %lang(cs) %{_mandir}/cs/man1/*.1*
 %lang(cy) %{_mandir}/cy/man1/*.1*
 %lang(da) %{_mandir}/da/man1/*.1*
@@ -113,6 +149,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(en_GB) %{_mandir}/en_GB/man1/*.1*
 %lang(eo) %{_mandir}/eo/man1/*.1*
 %lang(es) %{_mandir}/es/man1/*.1*
+%lang(et) %{_mandir}/et/man1/*.1*
 %lang(eu) %{_mandir}/eu/man1/*.1*
 %lang(fa) %{_mandir}/fa/man1/*.1*
 %lang(fi) %{_mandir}/fi/man1/*.1*
@@ -136,9 +173,9 @@ rm -rf $RPM_BUILD_ROOT
 %lang(nn) %{_mandir}/nn/man1/*.1*
 %lang(oc) %{_mandir}/oc/man1/*.1*
 %lang(pl) %{_mandir}/pl/man1/*.1*
-%lang(pt_BR) %{_mandir}/pt_BR/man1/*.1*
-%lang(pt) %{_mandir}/pt/man1/*.1*
 %lang(ps) %{_mandir}/ps/man1/*.1*
+%lang(pt) %{_mandir}/pt/man1/*.1*
+%lang(pt_BR) %{_mandir}/pt_BR/man1/*.1*
 %lang(ro) %{_mandir}/ro/man1/*.1*
 %lang(ru) %{_mandir}/ru/man1/*.1*
 %lang(sk) %{_mandir}/sk/man1/*.1*
@@ -154,4 +191,7 @@ rm -rf $RPM_BUILD_ROOT
 %lang(zh_CN) %{_mandir}/zh_CN/man1/*.1*
 %lang(zh_HK) %{_mandir}/zh_HK/man1/*.1*
 %lang(zh_TW) %{_mandir}/zh_TW/man1/*.1*
+
+%files -n nautilus-extension-deja-dup
+%defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/nautilus/extensions-3.0/libdeja-dup.so
