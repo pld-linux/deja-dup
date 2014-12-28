@@ -10,7 +10,7 @@ Source0:	http://launchpad.net/deja-dup/32/32.0/+download/%{name}-%{version}.tar.
 URL:		http://launchpad.net/deja-dup
 BuildRequires:	cmake
 BuildRequires:	docbook-dtd412-xml
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:2.32.0
 BuildRequires:	gnome-doc-utils
 BuildRequires:	gtk+3-devel >= 3.0.0
