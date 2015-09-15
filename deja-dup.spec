@@ -1,35 +1,34 @@
 Summary:	Backup tool
-Summary(pl.UTF-8):      Narzędzie do wykonywania kopii zapasowych
+Summary(pl.UTF-8):	Narzędzie do wykonywania kopii zapasowych
 Name:		deja-dup
-Version:	32.0
+Version:	34.0
 Release:	1
 License:	GPL v3
 Group:		X11/Applications
-Source0:	http://launchpad.net/deja-dup/32/32.0/+download/%{name}-%{version}.tar.xz
-# Source0-md5:	83e693cfebe397be0c67d3d362ae92c9
+Source0:	http://launchpad.net/deja-dup/34/34.0/+download/%{name}-%{version}.tar.xz
+# Source0-md5:	20791d5978f16f3ec456a0e51e6b0564
 URL:		http://launchpad.net/deja-dup
 BuildRequires:	cmake
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gettext-tools
-BuildRequires:	glib2-devel >= 1:2.32.0
+BuildRequires:	glib2-devel >= 1:2.34.0
 BuildRequires:	gnome-doc-utils
-BuildRequires:	gtk+3-devel >= 3.0.0
+BuildRequires:	gtk+3-devel >= 3.6.0
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	itstool
 BuildRequires:	libgnome-keyring-devel
 BuildRequires:	libnotify-devel >= 0.7.0
+BuildRequires:	libpeas-devel
 BuildRequires:	libtool >= 2:2.2.6
-BuildRequires:	libunique3-devel
 BuildRequires:	libxml2-progs
 BuildRequires:	nautilus-devel >= 3.0.0
 BuildRequires:	perl-Locale-gettext
-BuildRequires:	pkgconfig
+BuildRequires:	pkgconfig >= 1:0.24
 BuildRequires:	rpmbuild(find_lang) >= 1.35
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	vala >= 0.20.0
+BuildRequires:	vala-libsecret
 BuildRequires:	yelp-tools >= 3.2.0
-BuildRequires:  libpeas-devel
-BuildRequires:  vala-libsecret
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	glib2 >= 1:2.26.0
 Requires:	duplicity >= 0.6.23
@@ -50,13 +49,13 @@ Features:
 - Integrates well into your GNOME desktop
 
 %description -l pl.UTF-8
-Deja Dup jest prostym narzędziem do wykonywania kopii zapasowych. Ukrywa on
-złożoność prawidłowych kopii zapasowych (szyfrowanych, poza komputerem i
-regularnych) i używa programu duplicity jako mechanizmu.
+Deja Dup jest prostym narzędziem do wykonywania kopii zapasowych.
+Ukrywa on złożoność prawidłowych kopii zapasowych (szyfrowanych, poza
+komputerem i regularnych) i używa programu duplicity jako mechanizmu.
 
 %package -n nautilus-extension-deja-dup
 Summary:	deja-dup extension for Nautilus
-Summary(pl.UTF-8):      Rozszerzenie deja-dup dla Nautilusa
+Summary(pl.UTF-8):	Rozszerzenie deja-dup dla Nautilusa
 Group:		X11/Applications
 Requires:	%{name} = %{version}-%{release}
 Requires:	nautilus >= 3.0.0
@@ -66,9 +65,9 @@ This package provides a Nautilus extension that adds the 'Revert to
 Previous Version' option to the right-click context menu in Nautilus.
 
 %description -n nautilus-extension-deja-dup -l pl.UTF-8
-Ten pakiet dostarcza rozszerzenie Nautilusa dodające opcję "Przywróć do
-poprzedniej wersji" do menu kontekstowego uaktywnianego prawym klawiszem myszy
-w Nautilusie.
+Ten pakiet dostarcza rozszerzenie Nautilusa dodające opcję "Przywróć
+do poprzedniej wersji" do menu kontekstowego uaktywnianego prawym
+klawiszem myszy w Nautilusie.
 
 %prep
 %setup -q
