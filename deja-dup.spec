@@ -1,13 +1,14 @@
 Summary:	Backup tool
 Summary(pl.UTF-8):	Narzędzie do wykonywania kopii zapasowych
 Name:		deja-dup
-Version:	34.0
+Version:	34.2
 Release:	1
 License:	GPL v3
 Group:		X11/Applications
-Source0:	http://launchpad.net/deja-dup/34/34.0/+download/%{name}-%{version}.tar.xz
-# Source0-md5:	20791d5978f16f3ec456a0e51e6b0564
+Source0:	http://launchpad.net/deja-dup/34/34.2/+download/%{name}-%{version}.tar.xz
+# Source0-md5:	1b9bf984b2d163b6b5854f23a3e0eef9
 URL:		http://launchpad.net/deja-dup
+BuildRequires:	PackageKit-devel
 BuildRequires:	cmake
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gettext-tools
