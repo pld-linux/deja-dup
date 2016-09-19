@@ -7,6 +7,7 @@ License:	GPL v3
 Group:		X11/Applications
 Source0:	http://launchpad.net/deja-dup/34/34.2/+download/%{name}-%{version}.tar.xz
 # Source0-md5:	1b9bf984b2d163b6b5854f23a3e0eef9
+Patch0:		s3_multiprocessing.patch
 URL:		http://launchpad.net/deja-dup
 BuildRequires:	PackageKit-devel
 BuildRequires:	cmake
@@ -72,6 +73,7 @@ klawiszem myszy w Nautilusie.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %cmake \

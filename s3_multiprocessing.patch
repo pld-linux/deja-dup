@@ -1,0 +1,11 @@
+diff -dur deja-dup-34.2.orig/libdeja/BackendS3.vala deja-dup-34.2/libdeja/BackendS3.vala
+--- deja-dup-34.2.orig/libdeja/BackendS3.vala	2014-04-29 03:42:09.000000000 +0200
++++ deja-dup-34.2/libdeja/BackendS3.vala	2016-09-19 18:21:32.140400704 +0200
+@@ -41,6 +41,7 @@
+   public override void add_argv(ToolJob.Mode mode, ref List<string> argv) {
+     if (mode == ToolJob.Mode.INVALID)
+       argv.append("--s3-use-new-style");
++    argv.append("--s3-use-multiprocessing");
+   }
+   
+   string get_default_bucket() {
