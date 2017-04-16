@@ -1,0 +1,28 @@
+--- deja-dup-34.3/deja-dup/widgets/ConfigList.vala.newvala	2017-04-16 11:46:42.353133440 +0200
++++ deja-dup-34.3/deja-dup/widgets/ConfigList.vala	2017-04-16 11:46:47.219574579 +0200
+@@ -333,7 +333,7 @@ public class ConfigList : ConfigWidget
+ 
+     model.row_deleted.disconnect(write_to_config);
+     foreach (Gtk.TreeIter iter in iters) {
+-      (model as Gtk.ListStore).remove(iter);
++      (model as Gtk.ListStore).remove(ref iter);
+     }
+     model.row_deleted.connect(write_to_config);
+ 
+--- deja-dup-34.3/deja-dup/widgets/ConfigLocation.vala.newvala	2017-04-16 11:47:07.522907908 +0200
++++ deja-dup-34.3/deja-dup/widgets/ConfigLocation.vala	2017-04-16 11:47:33.649997561 +0200
+@@ -397,12 +397,12 @@ public class ConfigLocation : ConfigWidg
+     if (uuid == saved_uuid)
+       return;
+ 
+-    store.remove(iter);
++    store.remove(ref iter);
+ 
+     if (--num_volumes == 0) {
+       Gtk.TreeIter sep_iter;
+       if (store.get_iter_from_string(out sep_iter, index_vol_sep.to_string())) {
+-        store.remove(sep_iter);
++        store.remove(ref sep_iter);
+         index_vol_sep = -2;
+       }
+     }

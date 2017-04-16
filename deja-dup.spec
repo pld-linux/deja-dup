@@ -1,13 +1,14 @@
 Summary:	Backup tool
 Summary(pl.UTF-8):	Narzędzie do wykonywania kopii zapasowych
 Name:		deja-dup
-Version:	34.2
+Version:	34.3
 Release:	1
 License:	GPL v3
 Group:		X11/Applications
-Source0:	http://launchpad.net/deja-dup/34/34.2/+download/%{name}-%{version}.tar.xz
-# Source0-md5:	1b9bf984b2d163b6b5854f23a3e0eef9
+Source0:	http://launchpad.net/deja-dup/34/34.3/+download/%{name}-%{version}.tar.xz
+# Source0-md5:	a6f153573ed929aa7c0af60077873eff
 Patch0:		s3_multiprocessing.patch
+Patch1:		%{name}-vala-036.patch
 URL:		http://launchpad.net/deja-dup
 BuildRequires:	PackageKit-devel
 BuildRequires:	cmake
@@ -28,7 +29,7 @@ BuildRequires:	perl-Locale-gettext
 BuildRequires:	pkgconfig >= 1:0.24
 BuildRequires:	rpmbuild(find_lang) >= 1.35
 BuildRequires:	rpmbuild(macros) >= 1.311
-BuildRequires:	vala >= 0.20.0
+BuildRequires:	vala >= 2:0.36.0
 BuildRequires:	vala-libsecret
 BuildRequires:	yelp-tools >= 3.2.0
 Requires(post,postun):	gtk-update-icon-cache
@@ -74,6 +75,7 @@ klawiszem myszy w Nautilusie.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %cmake \
