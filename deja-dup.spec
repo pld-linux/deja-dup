@@ -2,7 +2,7 @@ Summary:	Backup tool
 Summary(pl.UTF-8):	Narzędzie do wykonywania kopii zapasowych
 Name:		deja-dup
 Version:	34.3
-Release:	1
+Release:	2
 License:	GPL v3
 Group:		X11/Applications
 Source0:	http://launchpad.net/deja-dup/34/34.3/+download/%{name}-%{version}.tar.xz
