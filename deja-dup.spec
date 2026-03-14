@@ -2,7 +2,7 @@ Summary:	Backup tool
 Summary(pl.UTF-8):	Narzędzie do wykonywania kopii zapasowych
 Name:		deja-dup
 Version:	50.0
-Release:	1
+Release:	2
 License:	GPL v3+
 Group:		X11/Applications
 Source0:	https://gitlab.gnome.org/World/deja-dup/-/archive/%{version}/%{name}-%{version}.tar.gz
@@ -60,7 +60,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %meson_install
 
-%find_lang %{name} --with-gnome
+%{__rm} -rf $RPM_BUILD_ROOT%{_localedir}/{bo,ce,kab,shn,tg}
+
+%find_lang %{name} --with-gnome --all-name
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -84,7 +86,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libexecdir}/deja-dup/*
 %{_datadir}/dbus-1/services/org.gnome.DejaDup.service
 %{_datadir}/glib-2.0/schemas/org.gnome.DejaDup.gschema.xml
-%{_datadir}/help/*
 %{_datadir}/metainfo/org.gnome.DejaDup.metainfo.xml
 %{_desktopdir}/org.gnome.DejaDup.desktop
 %{_iconsdir}/hicolor/scalable/apps/org.gnome.DejaDup.svg
