@@ -23,6 +23,7 @@ BuildRequires:	ninja >= 1.5
 BuildRequires:	rpmbuild(find_lang) >= 1.35
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	vala
+BuildRequires:	vala-libadwaita >= 1.8
 BuildRequires:	vala-libsecret
 BuildRequires:	yelp-tools >= 3.2.0
 Requires(post,postun):	glib2 >= 1:2.80
