@@ -38,6 +38,7 @@ Requires:	libfuse3 >= 3
 Requires:	libsecret >= 0.18.6
 Requires:	rclone
 Requires:	restic >= 0.17.1
+Obsoletes:	nautilus-extension-deja-dup < 42
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
