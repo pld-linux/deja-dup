@@ -2,7 +2,7 @@ Summary:	Backup tool
 Summary(pl.UTF-8):	Narzędzie do wykonywania kopii zapasowych
 Name:		deja-dup
 Version:	50.0
-Release:	2
+Release:	3
 License:	GPL v3+
 Group:		X11/Applications
 Source0:	https://gitlab.gnome.org/World/deja-dup/-/archive/%{version}/%{name}-%{version}.tar.gz
@@ -20,17 +20,22 @@ BuildRequires:	libsecret-devel >= 0.18.6
 BuildRequires:	libsoup3-devel >= 3.0
 BuildRequires:	meson >= 1.1
 BuildRequires:	ninja >= 1.5
+BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(find_lang) >= 1.35
-BuildRequires:	rpmbuild(macros) >= 1.311
+BuildRequires:	rpmbuild(macros) >= 2.042
 BuildRequires:	vala
 BuildRequires:	vala-libadwaita >= 1.8
-BuildRequires:	vala-libsecret
+BuildRequires:	vala-libsecret >= 0.18.6
 BuildRequires:	yelp-tools >= 3.2.0
-Requires(post,postun):	glib2 >= 1:2.80
 Requires(post,postun):	gtk-update-icon-cache
 Requires:	duplicity >= 2.1.0
+Requires:	glib2 >= 1:2.80
+Requires:	gtk4 >= 4.18
 Requires:	hicolor-icon-theme
-Requires:	libfuse3
+Requires:	json-glib >= 1.2
+Requires:	libadwaita >= 1.8
+Requires:	libfuse3 >= 3
+Requires:	libsecret >= 0.18.6
 Requires:	rclone
 Requires:	restic >= 0.17.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -60,7 +65,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %meson_install
 
-%{__rm} -rf $RPM_BUILD_ROOT%{_localedir}/{bo,ce,kab,shn,tg}
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/{ie,io}
 
 %find_lang %{name} --with-gnome --all-name
 
@@ -77,13 +82,18 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc NEWS.md PACKAGING.md README.md
-%license LICENSES/*
+%doc NEWS.md README.md
 %attr(755,root,root) %{_bindir}/deja-dup
 %dir %{_libdir}/deja-dup
-%{_libdir}/deja-dup/*
+%{_libdir}/deja-dup/libdeja.so
+%if "%{_libexecdir}" != "%{_libdir}"
 %dir %{_libexecdir}/deja-dup
-%{_libexecdir}/deja-dup/*
+%endif
+%attr(755,root,root) %{_libexecdir}/deja-dup/deja-dup-find-fusermount
+%attr(755,root,root) %{_libexecdir}/deja-dup/deja-dup-monitor
+%attr(755,root,root) %{_libexecdir}/deja-dup/fusermount
+# symlink
+%{_libexecdir}/deja-dup/fusermount3
 %{_datadir}/dbus-1/services/org.gnome.DejaDup.service
 %{_datadir}/glib-2.0/schemas/org.gnome.DejaDup.gschema.xml
 %{_datadir}/metainfo/org.gnome.DejaDup.metainfo.xml
